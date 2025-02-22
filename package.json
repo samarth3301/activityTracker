@@ -3,14 +3,29 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "biome lint --write ./src",
+    "format": "biome format --write ./src"
   },
   "keywords": [],
   "author": "samarth <samarplayz1337@gmail.com>",
   "license": "MIT",
   "description": "A simple backend for activity tracker.",
   "dependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@prisma/client": "^6.4.1",
     "@types/express": "^5.0.0",
-    "express": "^4.21.2"
+    "@types/helmet": "^4.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/typescript": "^2.0.0",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "prisma": "^6.4.1",
+    "typescript": "^5.7.3",
+    "winston": "^3.17.0"
   }
 }
