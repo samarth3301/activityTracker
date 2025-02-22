@@ -1,0 +1,16 @@
+{
+  "name": "activitytracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "samarth <samarplayz1337@gmail.com>",
+  "license": "MIT",
+  "description": "A simple backend for activity tracker.",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.2"
+  }
+}
