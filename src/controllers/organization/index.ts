@@ -1,1 +1,1 @@
-export { default as manageControllers } from "./manage.controller"
+export { default as manageControllers } from "./manage.controller";
