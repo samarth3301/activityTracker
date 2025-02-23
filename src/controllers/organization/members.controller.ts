@@ -1,11 +1,11 @@
-import { user } from "@prisma/client";
+import { User } from "@prisma/client";
 import { db } from "../../config/database";
 import APIError from "../../utils/APIError";
 import catchAsync from "../../utils/catchAsync";
 import { Request, Response } from "express";
 
 const addMember = catchAsync(async (req: Request, res: Response) => {
-	const user = req.user as user;
+	const user = req.user as User;
 	const { email } = req.body as { email: string };
 	if (!email) {
 		throw new APIError(404, "Missing required fields");
@@ -33,7 +33,7 @@ const removeMember = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getMembers = catchAsync(async (req: Request, res: Response) => {
-	const user = req.user as user;
+	const user = req.user as User;
 	try {
 		const members = await db.user.findFirst({
 			where: {
