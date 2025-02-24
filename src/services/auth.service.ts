@@ -1,8 +1,8 @@
-import { User } from "@prisma/client";
-import jwt from "jsonwebtoken"
+import { user } from "@prisma/client";
+import jwt from "jsonwebtoken";
 
 export function generateTokens(
-    user: User,
+    user: user,
     jti: string,
     secretKey: string,
 ): { accessToken: string; refreshToken: string } {

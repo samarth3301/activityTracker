@@ -11,5 +11,5 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 export default {
-	registerUser
+	registerUser,
 };
