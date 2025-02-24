@@ -7,33 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(uuid()) @map("_id")
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  ownedOrganization     Organization?  @relation("Owner", fields: [ownedOrganizationId], references: [id])
-  ownedOrganizationId   String?        @unique
-  memberOfOrganizations Organization[] @relation("Members")
-  organization          Organization?  @relation("MemberOf", fields: [organizationId], references: [id])
-  organizationId        String?
+model user {
+  id                  String                 @id @default(uuid()) @map("_id")
+  name                String
+  email               String
+  verification_status String
+  subscriptions       subscription[]
+  organization        organization_members[]
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
 }
 
-model Organization {
-  id      String  @id @default(uuid()) @map("_id")
-  name    String
-  owner   User?   @relation("Owner")
-  ownerId String? @unique
-  members User[]  @relation("Members")
-  users   User[]  @relation("MemberOf")
+model subscription {
+  id              String        @id @default(uuid()) @map("_id")
+  key             String        @unique
+  user            user?         @relation(fields: [userId], references: [id])
+  userId          String?
+  organization    organizations @relation(fields: [organizationsId], references: [id])
+  organizationsId String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
-model admin {
-  id        String   @id @default(uuid()) @map("_id")
-  username  String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model organizations {
+  id           String                 @id @default(uuid()) @map("_id")
+  name         String
+  members      organization_members[]
+  subscription subscription[]
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+}
+
+model organization_members {
+  id              String         @id @default(uuid()) @map("_id")
+  user            user           @relation(fields: [userId], references: [id])
+  userId          String
+  role            String
+  organizations   organizations? @relation(fields: [organizationsId], references: [id])
+  organizationsId String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 }
